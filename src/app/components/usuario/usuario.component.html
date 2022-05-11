@@ -1,0 +1,75 @@
+<h1>Lista Usuarios</h1>
+
+<div class="container mb-4" >
+    <button type="button" (click)="btnBuscar()"> Buscar</button>
+</div>
+
+<table class="table table-dark table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        <th scope="col" >ID</th>
+        <th scope="col" >Nombre</th>
+        <th scope="col" >Apellido</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios, let i = index">
+        <th scope="row">{{usuario.usuId}}</th>
+        <td>{{usuario.nombre}}</td>
+        <td>{{usuario.apellido}}</td>
+        <td class="text-center">
+            <button class="btn btn-info mr-1" (click)="cargarUsuario(usuario)">
+              <i class="fa fa-pen"></i>
+            </button>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-danger mr-1" (click)="eliminarUsuario(i)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="container col-8 mt-3">
+    <form (ngSubmit)="crearUsuario()">
+        <div class="row mb-3">
+            <label for="inputId" class="col-sm-2 col-form-label" >ID</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Id" disabled required [(ngModel)]="miUsuario.usuId" name="usuId">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputNombre" class="col-sm-2 col-form-label" >Nombre</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nombre" required [(ngModel)]="miUsuario.nombre" name="nombre">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputApellido" class="col-sm-2 col-form-label">Apellido</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="apellido" required [(ngModel)]="miUsuario.apellido" name="apellido">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group text-center col-6" >
+                <button  type="submit" class="btn btn-primary"  >
+                <i class="fa fa-save"></i>
+                    Nuevo
+                </button >
+            </div>
+            <div class="form-group text-center col-6" *ngIf="miUsuario.usuId >= 0" >
+                <button  type="button" class="btn btn-primary" (click)="editarUsuario()">
+                <i class="fa fa-save"></i>
+                    Actualizar
+                </button >
+            </div>
+        </div>
+
+
+    </form>
+  </div>
+  
